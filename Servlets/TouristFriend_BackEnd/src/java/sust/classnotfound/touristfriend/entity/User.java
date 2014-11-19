@@ -41,7 +41,7 @@ import sust.classnotfound.touristfriend.bean.UserBean;
     @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
     @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.userName = :userName"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
+    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByValidity", query = "SELECT u FROM User u WHERE u.validity = :validity"),
     @NamedQuery(name = "User.findBySex", query = "SELECT u FROM User u WHERE u.sex = :sex"),
     @NamedQuery(name = "User.findByDob", query = "SELECT u FROM User u WHERE u.dob = :dob")})
@@ -62,8 +62,8 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @Column(name = "address")
-    private String address;
+    @Column(name = "password")
+    private String password;
     @Basic(optional = false)
     @Column(name = "validity")
     private boolean validity;
@@ -87,7 +87,7 @@ public class User implements Serializable {
         this.userId = userBean.getUserId();
         this.userName = userBean.getUserName();
         this.email = userBean.getEmail();
-        this.address = userBean.getAddress();
+        this.password = userBean.getPassword();
         this.validity = userBean.isValidity();
         this.sex = userBean.getSex();
         this.dob = userBean.getDob();
@@ -104,7 +104,7 @@ public class User implements Serializable {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
-        this.address = address;
+        this.password = address;
         this.validity = validity;
         this.sex = sex;
     }
@@ -143,12 +143,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean getValidity() {

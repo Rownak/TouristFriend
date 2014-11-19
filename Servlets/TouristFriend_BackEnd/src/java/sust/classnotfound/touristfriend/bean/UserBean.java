@@ -23,7 +23,7 @@ public class UserBean {
     
     private String email;
     
-    private String address;
+    private String password;
     
     private boolean validity;
     
@@ -38,27 +38,27 @@ public class UserBean {
         this.userId = user.getUserId();
         this.userName = user.getUserName();
         this.email = user.getEmail();
-        this.address = user.getAddress();
+        this.password = user.getPassword();
         this.validity = user.getValidity();
         this.sex = user.getSex();
         this.typeBean = new TypeBean(user.getIdType());
     }
 
-    public UserBean(int userId, String userName, String email, String address, String sex) {
+    public UserBean(int userId, String userName, String email, String password, String sex) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
-        this.address = address;
+        this.password = password;
         this.sex = sex;
         
     }
     
-    public UserBean(Integer idUser, int userId, String userName, String email, String address, boolean validity, String sex) {
+    public UserBean(Integer idUser, int userId, String userName, String email, String password, boolean validity, String sex) {
         this.idUser = idUser;
         this.userId = userId;
         this.userName = userName;
         this.email = email;
-        this.address = address;
+        this.password = password;
         this.validity = validity;
         this.sex = sex;
     }
@@ -97,12 +97,12 @@ public class UserBean {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPassword(String address) {
+        this.password = address;
     }
 
     public boolean isValidity() {

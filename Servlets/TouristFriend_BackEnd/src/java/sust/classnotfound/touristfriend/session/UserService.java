@@ -298,20 +298,20 @@ public class UserService implements IUserService , LocatableService {
      * @param address the field
      * @return List of User data objects, empty list in case no results were found.
      */
-    public java.util.List findUserByAddress(java.lang.String address) throws GenericBusinessException {
+    public java.util.List findUserByPassword(java.lang.String password) throws GenericBusinessException {
       sust.classnotfound.touristfriend.hibernatehelper.HibernateQueryHelper hibernateTemplate = new sust.classnotfound.touristfriend.hibernatehelper.HibernateQueryHelper();
       try {
-         String queryString = "from " + User.class.getName() + " e where e.address like :address ";
+         String queryString = "from " + User.class.getName() + " e where e.password like :password ";
          // Add a an order by on all primary keys to assure reproducable results.
          String orderByPart = "";
          orderByPart += " order by e.idUser";
          queryString += orderByPart;
          Query query = hibernateTemplate.createQuery(queryString);
-         hibernateTemplate.setQueryParameter(query, "address", address);
+         hibernateTemplate.setQueryParameter(query, "password", password);
          List list = hibernateTemplate.list(query);
          return list;
       } finally {
-         log.debug("finished findUserByAddress(java.lang.String address)");
+         log.debug("finished findUserByAddress(java.lang.String password)");
       }
     }
     /**

@@ -117,7 +117,7 @@ public interface IUserService {
      * @param address the field
      * @return List of User data objects, empty list in case no results were found.
      */
-    java.util.List<sust.classnotfound.touristfriend.entity.User> findUserByAddress(java.lang.String address) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
+    java.util.List<sust.classnotfound.touristfriend.entity.User> findUserByPassword(java.lang.String password) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
     /**
      *
      * Retrieves a list of data object for the specified validity field.
