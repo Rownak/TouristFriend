@@ -99,6 +99,9 @@ public class District implements Serializable {
     public void setDistrictName(String districtName) {
         this.districtName = districtName;
     }
+    public java.lang.Integer getPrimaryKey(){ 
+    return getIdDistrict(); 
+  } 
 
     @XmlTransient
     public List<Location> getLocationList() {

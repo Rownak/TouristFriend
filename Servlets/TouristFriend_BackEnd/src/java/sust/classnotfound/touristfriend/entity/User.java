@@ -26,6 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import sust.classnotfound.touristfriend.bean.UserBean;
 
 /**
  *
@@ -81,6 +82,19 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(UserBean userBean) {
+        this.idUser = userBean.getIdUser();
+        this.userId = userBean.getUserId();
+        this.userName = userBean.getUserName();
+        this.email = userBean.getEmail();
+        this.address = userBean.getAddress();
+        this.validity = userBean.isValidity();
+        this.sex = userBean.getSex();
+        this.dob = userBean.getDob();
+        this.photosList = photosList;
+        this.idType = new Type(userBean.getTypeBean()) ;
+    }
+    
     public User(Integer idUser) {
         this.idUser = idUser;
     }

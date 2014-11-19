@@ -70,7 +70,7 @@ public interface IUserService {
 
    /**
     * Obtains the total number of user objects in the storage.
-    * <b>NOTE:</b>If this session façade is configured <b>not</b> to use the FastLaneReader,
+    * <b>NOTE:</b>If this session faï¿½ade is configured <b>not</b> to use the FastLaneReader,
     * this call will be very computationally wasteful as it will first have to retrieve all entities from
     * the entity bean's <code>findAll</code> method.
     *

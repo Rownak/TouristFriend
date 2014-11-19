@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import sust.classnotfound.touristfriend.bean.TypeBean;
 
 /**
  *
@@ -52,6 +53,13 @@ public class Type implements Serializable {
     public Type() {
     }
 
+    public Type(TypeBean typeBean) {
+        this.idType = typeBean.getIdType();
+        this.name = typeBean.getName();
+        this.description = typeBean.getDescription();
+        
+    }
+    
     public Type(Integer idType) {
         this.idType = idType;
     }
