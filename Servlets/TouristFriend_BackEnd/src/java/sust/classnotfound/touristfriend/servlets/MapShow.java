@@ -10,6 +10,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,17 +20,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sust.classnotfound.touristfriend.apiImpl.UserApiImpl;
+import sust.classnotfound.touristfriend.bean.PlaceBean;
 import sust.classnotfound.touristfriend.bean.UserBean;
+import sust.classnotfound.touristfriend.entity.Place;
 import sust.classnotfound.touristfriend.exception.GenericBusinessException;
+import sust.classnotfound.touristfriend.session.PlaceService;
 import sust.classnotfound.touristfriend.useful.ReadRequest;
 
 /**
  *
  * @author Rownak
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "MapShow", urlPatterns = {"/MapShow"})
+public class MapShow extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,39 +45,65 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
+        response.setContentType("text/html;charset=UTF-8");
+
         StringBuffer resultBuffer = new StringBuffer();
         resultBuffer = ReadRequest.converToString(request, response);
         PrintWriter out = response.getWriter();
         
-        UserBean userBean;
+        PlaceBean placeBean;
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         System.out.println("josn created");
-        userBean = gson.fromJson(resultBuffer.toString(), UserBean.class);
+        placeBean = gson.fromJson(resultBuffer.toString(), PlaceBean.class);
         System.out.println("object created");
         
-        String result =check(userBean);
+        System.out.println(placeBean.getName());
+        System.out.println(placeBean.getLatitude());
+        
+        
+        PlaceService placeService = new PlaceService();
+        List<Place> listOfPlace = new ArrayList<Place>();
+        
+        try {
+            listOfPlace = placeService.getPlaceList();
+         //   System.out.println("####"+listOfPlace.get(1).getPhotosList().size());
+        } catch (GenericBusinessException ex) {
+            Logger.getLogger(MapShow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<PlaceBean> listOfPlaceBean = new ArrayList<PlaceBean>();
+        for(int i=0; i< listOfPlace.size(); i++){
+            double dist = CalculationByDistance(placeBean.getLatitude(), placeBean.getLongitude(), listOfPlace.get(i).getLatitude(), listOfPlace.get(i).getLongitude());
+            
+            if(dist<50.00){
+                PlaceBean newPlace = new PlaceBean(listOfPlace.get(i));
+                listOfPlaceBean.add(newPlace);
+            }
+        }
+        String result = gson.toJson(listOfPlaceBean);
         out.println(result);
+        
     }
     
-    private String check(UserBean userBean) {
-        
-        UserApiImpl userApiImpl = new UserApiImpl();
-        Boolean valid = false;
-        try {
-           valid= userApiImpl.loginCheck(userBean);
-        } catch (GenericBusinessException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(valid){
-            return "Valid";
-        }
-        else{
-            return "Invalid";
-        }
-        
-    }
+    public double CalculationByDistance(double lat1, double lon1, double lat2, double lon2) {
+	        int Radius=6371;//radius of earth in Km         
+	        
+	        double dLat = Math.toRadians(lat2-lat1);
+	        double dLon = Math.toRadians(lon2-lon1);
+	        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	        Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+	        Math.sin(dLon/2) * Math.sin(dLon/2);
+	        double c = 2 * Math.asin(Math.sqrt(a));
+	        double valueResult= Radius*c;
+	        double km=valueResult/1;
+	        DecimalFormat newFormat = new DecimalFormat("####");
+	        int kmInDec =  Integer.valueOf(newFormat.format(km));
+	        double meter=valueResult%1000;
+	        int  meterInDec= Integer.valueOf(newFormat.format(meter));
+	        System.out.println("Radius Value"+""+valueResult+"   KM  "+kmInDec+" Meter   "+meterInDec);
+
+	       return Radius * c;
+	     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -112,7 +143,5 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-
 
 }

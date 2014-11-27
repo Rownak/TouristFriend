@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,17 +18,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sust.classnotfound.touristfriend.apiImpl.UserApiImpl;
-import sust.classnotfound.touristfriend.bean.UserBean;
+import sust.classnotfound.touristfriend.bean.PlaceBean;
+import sust.classnotfound.touristfriend.entity.Place;
 import sust.classnotfound.touristfriend.exception.GenericBusinessException;
+import sust.classnotfound.touristfriend.session.PlaceService;
 import sust.classnotfound.touristfriend.useful.ReadRequest;
 
 /**
  *
  * @author Rownak
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "PhotosGet", urlPatterns = {"/PhotosGet"})
+public class PhotosGet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,36 +42,37 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        StringBuffer resultBuffer = new StringBuffer();
+        response.setContentType("text/html;charset=UTF-8");
+                StringBuffer resultBuffer = new StringBuffer();
         resultBuffer = ReadRequest.converToString(request, response);
         PrintWriter out = response.getWriter();
         
-        UserBean userBean;
+        PlaceBean placeBean;
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         System.out.println("josn created");
-        userBean = gson.fromJson(resultBuffer.toString(), UserBean.class);
+        placeBean = gson.fromJson(resultBuffer.toString(), PlaceBean.class);
         System.out.println("object created");
         
-        String result =check(userBean);
-        out.println(result);
-    }
-    
-    private String check(UserBean userBean) {
+        System.out.println(placeBean.getName());
+        System.out.println(placeBean.getLatitude());
         
-        UserApiImpl userApiImpl = new UserApiImpl();
-        Boolean valid = false;
+        
+        PlaceService placeService = new PlaceService();
+        
         try {
-           valid= userApiImpl.loginCheck(userBean);
+            Place p = null;
+            List list = placeService.findPlaceByIdPlace(placeBean.getIdPlace());
+            if(list.size()>0){
+                 p = (Place) list.get(0);
+            System.out.println(p.getPhotosList().get(0).getDescription());
+            }
+            else{
+                System.out.println("nothing");
+                System.out.println(p.getName());
+            }
         } catch (GenericBusinessException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(valid){
-            return "Valid";
-        }
-        else{
-            return "Invalid";
+            Logger.getLogger(PhotosGet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -112,7 +115,5 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-
 
 }
