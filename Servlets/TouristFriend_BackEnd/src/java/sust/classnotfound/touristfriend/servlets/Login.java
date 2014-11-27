@@ -10,16 +10,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sust.classnotfound.touristfriend.apiImpl.UserApiImpl;
 import sust.classnotfound.touristfriend.bean.UserBean;
-import sust.classnotfound.touristfriend.exception.GenericBusinessException;
 import sust.classnotfound.touristfriend.useful.ReadRequest;
 
 /**
@@ -43,7 +39,7 @@ public class Login extends HttpServlet {
         response.setContentType("application/json");
         StringBuffer resultBuffer = new StringBuffer();
         resultBuffer = ReadRequest.converToString(request, response);
-        PrintWriter out = response.getWriter();
+        
         
         UserBean userBean;
         GsonBuilder builder = new GsonBuilder();
@@ -51,27 +47,6 @@ public class Login extends HttpServlet {
         System.out.println("josn created");
         userBean = gson.fromJson(resultBuffer.toString(), UserBean.class);
         System.out.println("object created");
-        
-        String result =check(userBean);
-        out.println(result);
-    }
-    
-    private String check(UserBean userBean) {
-        
-        UserApiImpl userApiImpl = new UserApiImpl();
-        Boolean valid = false;
-        try {
-           valid= userApiImpl.loginCheck(userBean);
-        } catch (GenericBusinessException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(valid){
-            return "Valid";
-        }
-        else{
-            return "Invalid";
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -112,7 +87,5 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-
 
 }

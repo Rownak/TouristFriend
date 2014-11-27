@@ -6,7 +6,6 @@
 
 package sust.classnotfound.touristfriend.apiImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 import sust.classnotfound.touristfriend.api.UserApi;
 import sust.classnotfound.touristfriend.bean.UserBean;
@@ -42,33 +41,5 @@ public class UserApiImpl implements UserApi{
         
         return userBean;
     }
-
-    @Override
-    public List findUserByEmail(String email) throws GenericBusinessException {
-        List<User> listUser = new ArrayList<User>();
-        
-        listUser = userService.findUserByEmail(email);
-        
-        return listUser;
-    }
-
-    @Override
-    public Boolean loginCheck(UserBean userBean) throws GenericBusinessException {
-        Boolean valid = false;
-        List<User> listUser = new ArrayList<User>();
-        
-        listUser = findUserByEmail(userBean.getEmail());
-        
-        if(listUser!=null && listUser.size()>0){
-            if(listUser.get(0).getPassword().equalsIgnoreCase(userBean.getPassword()) && listUser.get(0).getValidity()==true){
-                valid = true;
-                System.out.println("Valid");
-            }
-        }
-        System.out.println(listUser.get(0).getPassword()+"     " + listUser.get(0).getValidity()+ "  aogds:" + userBean.getPassword());
-        return valid;
-        
-    }
-    
     
 }
