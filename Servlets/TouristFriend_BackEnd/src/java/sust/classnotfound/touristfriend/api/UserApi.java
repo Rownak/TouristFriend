@@ -6,6 +6,7 @@
 
 package sust.classnotfound.touristfriend.api;
 
+import java.util.List;
 import sust.classnotfound.touristfriend.bean.UserBean;
 
 
@@ -16,7 +17,12 @@ import sust.classnotfound.touristfriend.bean.UserBean;
  */
 public interface UserApi {
     
+   
     UserBean addUser(UserBean userBean) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
 
+    List findUserByEmail(java.lang.String email) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
     
+    Boolean loginCheck(UserBean userBean) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
+    
+
 }
