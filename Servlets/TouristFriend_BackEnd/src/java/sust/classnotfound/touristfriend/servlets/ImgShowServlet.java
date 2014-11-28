@@ -24,6 +24,7 @@ import sust.classnotfound.touristfriend.bean.PhotosBean;
 import sust.classnotfound.touristfriend.bean.PlaceBean;
 import sust.classnotfound.touristfriend.entity.Place;
 import sust.classnotfound.touristfriend.session.PlaceService;
+import sust.classnotfound.touristfriend.useful.Config;
 import sust.classnotfound.touristfriend.useful.ReadRequest;
 /**
  *
@@ -87,7 +88,7 @@ public class ImgShowServlet extends HttpServlet {
             // System.out.println(str);
             //String[] addressArray = {"c/c.jpg", "a/a.jpg", "b/b.jpg"};
             for (int i = 0; i < listOfPhotosBean.size(); i++) {
-                String str = "http://192.168.2.110:8084/ImageUpload1/" + listOfPhotosBean.get(i).getPhotoUrl();
+                String str = Config.SERVER_URL + listOfPhotosBean.get(i).getPhotoUrl();
                 out.println("<img src=" + "\"" + str + "\"" + "/>");
             }
 
