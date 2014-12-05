@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name ="skype_blue">#00AFF0</color>
+    <color name ="skype_text_hint">#00AFC0</color>
+    <color name ="skype_button">#0095CC</color>
+    <color name ="kmngreen">#5B9C64</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#7A7A7A</color>
+    <color name="background">#0044AA</color>
+    <color name="bluelight">#449DEF</color>
+    <color name="bluedark">#2F6699</color>
+    <color name="greenlight">#70C656</color>
+    <color name="greendark">#53933F</color>
+    <color name="orangelight">#F3AE1B</color>
+    <color name="orangedark">#BB6008</color>
+    <color name="black">#000000</color>
+    <color name="red">#f00</color>
+    <color name="transculent_red">#80ff0000</color>
+    <color name="firoja">#63b6ab</color>
+    <color name="yellow">#f0ff00</color>
+    <color name="merun">#440700</color>
+    <color name="violet">#8256a4</color>
+    <color name="violetlight">#d6b6e6</color>
+    <color name="paste">#1eb486</color>
+    <color name="purple">#bc1dd8</color>
+    <color name="pastelmagenta">#F49AC2</color>
+    <color name="pink">#ff007f</color>
+    <color name="flamingopink">#FC8EAC</color>
+    <color name="cherryblossompink">#ffb7c6</color>
+    <color name="darkpink">#E75480</color>
+    <color name = "byzantinepink">#BD33A4</color>
+    <color name = "glowypink">#FF66FF</color>
+    <color name = "glowypink2">#FF3399</color>
+    <color name = "bottlegreen">#324F17</color>
+    
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+</resources>

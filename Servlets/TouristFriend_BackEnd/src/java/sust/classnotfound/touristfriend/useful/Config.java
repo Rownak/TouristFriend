@@ -12,6 +12,6 @@ package sust.classnotfound.touristfriend.useful;
  */
 public class Config {
     
-    public static String SERVER_URL = "http://192.168.2.110:8084/TouristFriend_BackEnd/";
+    public static String SERVER_URL = "http://192.168.2.108:8084/TouristFriend_BackEnd/";
     
 }
