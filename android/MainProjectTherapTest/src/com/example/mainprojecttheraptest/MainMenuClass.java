@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainMenuClass extends Activity {
 
@@ -14,7 +15,7 @@ public class MainMenuClass extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_menu_layout);
 		
-		Button searchPlaceButton =(Button)findViewById(R.id.SearchPlaceButton);
+		ImageButton searchPlaceButton =(ImageButton)findViewById(R.id.SearchPlaceButton);
 		searchPlaceButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -28,7 +29,7 @@ public class MainMenuClass extends Activity {
 		});
         
         
-        Button takePhotoButton =(Button)findViewById(R.id.TakePhotoButton);
+        ImageButton takePhotoButton =(ImageButton)findViewById(R.id.TakePhotoButton);
         takePhotoButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -42,28 +43,28 @@ public class MainMenuClass extends Activity {
 		});
         
         
-        Button uploadPhotoButton =(Button)findViewById(R.id.UploadPhotoButton);
+        ImageButton uploadPhotoButton =(ImageButton)findViewById(R.id.UploadPhotoButton);
         uploadPhotoButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				
-				Intent intent=new Intent(MainMenuClass.this,UploadPhotoClass.class);
+				Intent intent=new Intent(MainMenuClass.this,UploadFromStroageClass.class);
 				startActivity(intent);
 				
 			}
 		});
         
         
-        Button ratePlaceButton =(Button)findViewById(R.id.RatePlaceButton);
+        ImageButton ratePlaceButton =(ImageButton)findViewById(R.id.RatePlaceButton);
         ratePlaceButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				
-				Intent intent=new Intent(MainMenuClass.this,SignInClass.class);
+				Intent intent=new Intent(MainMenuClass.this,RatingClass.class);
 				startActivity(intent);
 				
 			}

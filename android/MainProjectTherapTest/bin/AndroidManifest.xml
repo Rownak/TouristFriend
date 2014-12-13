@@ -35,7 +35,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.mainprojecttheraptest.MainClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,41 +46,66 @@
         
         <activity
             android:name="com.example.mainprojecttheraptest.SignInClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             
         </activity>
         
         <activity
             android:name="com.example.mainprojecttheraptest.SignUpClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             
         </activity>
         
         <activity
             android:name="com.example.mainprojecttheraptest.MainMenuClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             
         </activity>
-        
+                <activity
+            android:name="com.example.mainprojecttheraptest.UploadFile"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            
+        </activity>
          <activity
             android:name="com.example.mainprojecttheraptest.MapClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             
         </activity>
         
          <activity
             android:name="com.example.mainprojecttheraptest.ImageCaptureClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             
         </activity>
         
          
           <activity
             android:name="com.example.mainprojecttheraptest.UploadPhotoClass"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             
         </activity>
         
+            <activity
+            android:name="com.example.mainprojecttheraptest.UploadFromStroageClass"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
+            
+        </activity>
+        
+              <activity
+            android:name="com.example.mainprojecttheraptest.RatingClass"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
+            
+        </activity>
+
          <meta-data
             android:name="com.google.android.gms.version"
 

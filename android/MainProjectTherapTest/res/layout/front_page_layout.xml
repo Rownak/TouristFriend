@@ -4,72 +4,66 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="6" >
- <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="5" >
-
-        
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="5"
-            android:orientation="horizontal"
-             >
-            
-            <Button
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Search place" />
-        </LinearLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="1" >
+        android:orientation="horizontal" 
+        android:background="@color/skype_blue">
+
+        <ImageButton
+            android:id="@+id/frontsearchButton"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/frontsearch"
+            android:background="@color/skype_blue"
+           android:scaleType="fitXY" />
         
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="5"
+        android:background="@color/skype_blue"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight=".5"
-            android:weightSum=".5"
-            android:orientation="horizontal"
-             
-           
-            
-            >
+            android:layout_weight="1"
+            android:orientation="horizontal" 
+            android:scaleType="fitXY">
 
-            <Button
+            <ImageButton
                 android:id="@+id/signInButtonFront"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="Sign in" />
+               android:background="@color/skype_blue"
+                android:scaleType="fitXY"
+                android:src="@drawable/signin"
+               />
             
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight=".5"
-            android:weightSum=".5"
+            android:layout_weight="1"
             android:orientation="horizontal"
-             >
-            
-            <Button
-            android:id="@+id/signUpButtonFront"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Sign Up" />
-        </LinearLayout>
+            android:scaleType="fitXY" >
 
-        
+            <ImageButton
+                android:id="@+id/signUpButtonFront"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/signup"
+                android:background="@color/skype_blue"
+                android:scaleType="fitXY" />
+            
+        </LinearLayout>
     </LinearLayout>
-    
 
 </LinearLayout>

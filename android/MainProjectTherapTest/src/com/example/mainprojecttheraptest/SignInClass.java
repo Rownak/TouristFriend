@@ -82,10 +82,17 @@ public class SignInClass extends Activity{
 		protected void onPostExecute(String result) {
 
 			//loading_ProgressBar.setVisibility(View.GONE);
-			Toast.makeText(getBaseContext(), resultShow, Toast.LENGTH_LONG)
-					.show();
-			Intent intent=new Intent(SignInClass.this,MainMenuClass.class);
-			startActivity(intent);
+			
+			if(resultShow.equalsIgnoreCase("valid")){
+				Intent intent=new Intent(SignInClass.this,MainMenuClass.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+			else{
+				Intent intent=new Intent(SignInClass.this,MainClass.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
 		}
  }
 	

@@ -81,6 +81,9 @@ OnMarkerClickListener{
 		double latitude = myLocation.getLatitude();
 
 		double longitude = myLocation.getLongitude();
+		
+		//ImageCaptureClass imageCaptureClass =new ImageCaptureClass(latitude,longitude);
+		
 
 		CurrntLatlng = new LatLng(latitude, longitude);
 
@@ -91,7 +94,7 @@ OnMarkerClickListener{
 		MarkerOptions marker = new MarkerOptions().position(CurrntLatlng).title(
 				"My Location!");
 
-		map.addMarker(marker);
+		//map.addMarker(marker);
 
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(CurrntLatlng, 10.0f));
 		
@@ -202,7 +205,7 @@ OnMarkerClickListener{
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		// TODO Auto-generated method stub
-
+		
 		final int markerNumb = Integer.parseInt(marker.getSnippet());
 		
 
@@ -213,7 +216,7 @@ OnMarkerClickListener{
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		// set title
 		alertDialogBuilder.setTitle("Place Name:" + listOfPlaceBean.get(markerNumb).getName());
-
+		Toast.makeText(getApplicationContext(), listOfPlaceBean.get(markerNumb).getName(), Toast.LENGTH_LONG).show();
 		// set dialog message
 		alertDialogBuilder
 				.setMessage(
@@ -238,8 +241,11 @@ OnMarkerClickListener{
 									webView.getSettings().setJavaScriptEnabled(true);
 
 									Gson gson = new Gson();
-									String listOfImagesString = gson.toJson(listOfPlaceBean.get(markerNumb).getPhotosList());
-									webView.loadUrl(Config.SERVER_URL+"ImgShowServlet"+"?address=" +listOfImagesString);
+//									String listOfImagesString = gson.toJson(listOfPlaceBean.get(markerNumb).getPhotosList());
+//									webView.loadUrl(Config.SERVER_URL+"ImgShowServlet"+"?address=" +listOfImagesString);
+									
+									PlaceBean clickedPlace = listOfPlaceBean.get(markerNumb);
+									webView.loadUrl(Config.SERVER_URL+"WebViewOfImages"+"?idPlace=" +clickedPlace.getIdPlace());
 								}
 								
 							 

@@ -6,9 +6,14 @@ import java.util.Date;
 import java.util.Locale;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,13 +28,23 @@ public class ImageCaptureClass extends Activity{
 	
 	private static final String IMAGE_DIRECTORY_NAME = "Captured Image";
 	 private Uri fileUri;
-	 
+	 public static final String MyPREFERENCES = "MyPrefs" ;
+	 public static final String lat_prefarence="ic";
+	 SharedPreferences sharedpreferences;
 	 String imageName;
+	 double latitude,longitude;
+	 String imageUrl;
+	 
+	 //constructor...
+
+
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		myLocation();
 		captureImage();
 		
 		if (!isDeviceSupportCamera()) {
@@ -58,6 +73,8 @@ public class ImageCaptureClass extends Activity{
 	        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 	 
 	        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+	        
+	        
 	 
 	        // start the image capture Intent
 	        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
@@ -98,10 +115,15 @@ public class ImageCaptureClass extends Activity{
 //	            	  Intent i= new Intent(ImageCapture.this,ChangeMetadataOfImage.class);
 //	   	           i.putExtra("imagePathName", imageName);
 //	   	           startActivity(i);
+	            	SetImageMetadataClass setImageMetadataClass = new SetImageMetadataClass(imageUrl, latitude, longitude);
+	            	setImageMetadataClass.loc2Exif(imageUrl, latitude, longitude);
 	            	
-	            	
-					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-							this);	 
+	              Toast.makeText(getApplicationContext(), imageUrl, Toast.LENGTH_LONG).show();
+	              
+	              
+	              
+	              
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);	 
 						// set title
 						alertDialogBuilder.setTitle("Image Upload");
 			 
@@ -114,11 +136,15 @@ public class ImageCaptureClass extends Activity{
 									// current activity
 									//MainActivity.this.finish();
 //									
-//									Intent intent=new Intent(Map.this,ShowImage.class);
-//									intent.putExtra("pathName", path);
-//									startActivity(intent);
-									Intent intent=new Intent(ImageCaptureClass.this,SignInClass.class);
+									Intent intent=new Intent(ImageCaptureClass.this,UploadPhotoClass.class);
+									intent.putExtra("latitude", latitude);
+									intent.putExtra("longitude", longitude);
+									intent.putExtra("imageName", imageName);
+									intent.putExtra("fileUrl", imageUrl);
 									startActivity(intent);
+//									Intent intent=new Intent(ImageCaptureClass.this,SignInClass.class);
+//									startActivity(intent);
+									
 									
 								}
 							  })
@@ -196,11 +222,13 @@ public class ImageCaptureClass extends Activity{
 	                Locale.getDefault()).format(new Date());
 	        File mediaFile;
 	        if (type == MEDIA_TYPE_IMAGE) {
+	        	
 	            mediaFile = new File(mediaStorageDir.getPath() + File.separator
 	                    + "IMG_" + timeStamp + ".jpg");
 	            
 	            //pass the image name to integrate location;
-	            
+	            imageUrl=mediaStorageDir.getPath() + File.separator
+	                    + "IMG_" + timeStamp + ".jpg";
 	             imageName="IMG"+timeStamp+".jpg";
 //	            Toast.makeText(getApplicationContext(),
 //	            		imageName, Toast.LENGTH_SHORT)
@@ -219,6 +247,20 @@ public class ImageCaptureClass extends Activity{
 	 
 	        return mediaFile;
 	    }
-	    
+		public void myLocation()
+		{
+			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			Criteria criteria = new Criteria();
+
+			String provider = locationManager.getBestProvider(criteria, true);
+			Location myLocation = locationManager.getLastKnownLocation(provider);
+
+			  latitude = myLocation.getLatitude();
+			  longitude = myLocation.getLongitude();
+			 
+			 //Toast.makeText(getApplicationContext(), ""+latitude, Toast.LENGTH_LONG).show();
+				
+
+		}
 
 }

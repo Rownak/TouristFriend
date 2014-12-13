@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainClass extends Activity {
 
@@ -16,7 +17,21 @@ public class MainClass extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.front_page_layout);
         
-        Button signInbutton =(Button)findViewById(R.id.signInButtonFront);
+        
+        ImageButton frontsearchbutton =(ImageButton)findViewById(R.id.frontsearchButton);
+        frontsearchbutton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+				Intent intent=new Intent(MainClass.this,MapClass.class);
+				startActivity(intent);
+				
+			}
+		});
+        
+        ImageButton signInbutton =(ImageButton)findViewById(R.id.signInButtonFront);
         signInbutton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -30,7 +45,7 @@ public class MainClass extends Activity {
 		});
         
         
-        Button signUpbutton =(Button)findViewById(R.id.signUpButtonFront);
+        ImageButton signUpbutton =(ImageButton)findViewById(R.id.signUpButtonFront);
         signUpbutton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

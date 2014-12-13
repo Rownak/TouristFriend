@@ -26,7 +26,7 @@ private Integer idUser;
     private String sex;
     private Date dob;
     
-    
+    private String message="Thanks";
     private TypeBean typeBean;
 
     
@@ -131,5 +131,37 @@ private Integer idUser;
         this.typeBean = typeBean;
     }
     
-    
+    public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public boolean validate(){
+        
+        if(email == null){
+            message = "Please fill the Email Field";
+            return false;
+        }
+        else if(password == null){
+            message = "Please fill the Password Field";
+            return false;
+        }
+        else if(!email.matches("\\w+(.*)\\w+@\\w+.\\w+")){
+            message = "Envalid Email address";
+            return false;
+        }
+        else if(password.length()<4){
+            message = "Password must be at least 8 character";
+            return false;
+        }
+        else if(password.matches("\\w*\\s\\w*")){
+            message = "Password must not contain any spaces";
+            return false;
+        }
+        
+        return true;
+    }
 }

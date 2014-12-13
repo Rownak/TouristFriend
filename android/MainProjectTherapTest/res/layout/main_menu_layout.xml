@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context=".MainClass" >
+    tools:context=".MainClass" 
+	
+    android:background="#f8fcfd">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -22,11 +24,14 @@
            
             
             >
-            <Button
-            android:id="@+id/SearchPlaceButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Search place" />
+
+            <ImageButton
+                android:id="@+id/SearchPlaceButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/searchplace"
+                android:background="#f8fcfd"
+                android:scaleType="fitXY" />
             
         </LinearLayout>
 
@@ -34,15 +39,18 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight=".5"
-            android:orientation="horizontal"
-             >
-            
-            <Button
-            android:id="@+id/TakePhotoButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Take photo" />
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/TakePhotoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/takephoto"
+                android:background="#a4a6a7"
+                android:scaleType="fitXY"  />
+
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -61,11 +69,14 @@
            
             
             >
-            <Button
-            android:id="@+id/UploadPhotoButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Upload photo" />
+
+            <ImageButton
+                android:id="@+id/UploadPhotoButton"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY"
+                android:background="#a4a6a7"
+                android:src="@drawable/uploadimage" />
             
         </LinearLayout>
 
@@ -75,12 +86,15 @@
             android:layout_weight=".5"
             android:orientation="horizontal"
              >
+
+            <ImageButton
+                android:id="@+id/RatePlaceButton"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/rateplace"
+                 android:background="#f8fcfd"
+                android:scaleType="fitXY" />
             
-            <Button
-            android:id="@+id/RatePlaceButton"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Rate this place" />
         </LinearLayout>
 
         

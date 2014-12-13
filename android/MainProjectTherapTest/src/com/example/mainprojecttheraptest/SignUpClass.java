@@ -6,12 +6,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import useful.RandomId;
 
 
 import com.google.gson.Gson;
@@ -37,7 +40,7 @@ public class SignUpClass extends Activity{
 	//ConnectionDetector cd;
 	
 	String userNameS,emailS,passS,confirmPassS,roleTypeS, jsonToPass, resultShow;
-	
+	UserBean userBean;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,17 @@ public class SignUpClass extends Activity{
 					roleTypeS = role_id.getText().toString();
 					jsonToPass = converToJson();
 					//Toast.makeText(Registration_class.this, jsonToPass,Toast.LENGTH_LONG).show();
-					new HttpAsyncTask().execute("http://192.168.2.108:8084/TouristFriend_BackEnd/Registration");
+					if(userBean.validate()){
+						Toast.makeText(getApplicationContext(), userBean.getMessage(), Toast.LENGTH_LONG).show();
+						new HttpAsyncTask().execute("http://192.168.2.110:8084/TouristFriend_BackEnd/Registration");
+					}
+					else{
+						Toast.makeText(getApplicationContext(), userBean.getMessage(), Toast.LENGTH_LONG).show();
+						password.setText("");
+						confirmPass.setText("");
+						Email.setText("");
+					}
+					
 				}
 			}
 		});
@@ -97,8 +110,8 @@ public class SignUpClass extends Activity{
 	
 	 private String converToJson() {
 			// TODO Auto-generated method stub
-		 
-		 UserBean userBean = new UserBean(1123,userNameS,emailS,passS,roleTypeS);
+		 BigInteger rand= RandomId.RandomIdGenerator.nextSessionId();
+		 userBean = new UserBean(rand.intValue(),userNameS,emailS,passS,roleTypeS);
 		 TypeBean typeBean = new TypeBean();
 		 typeBean.setName("User");
 		 typeBean.setIdType(1);
