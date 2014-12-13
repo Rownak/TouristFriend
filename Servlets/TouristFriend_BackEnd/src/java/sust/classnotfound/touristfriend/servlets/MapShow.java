@@ -50,34 +50,39 @@ public class MapShow extends HttpServlet {
         StringBuffer resultBuffer = new StringBuffer();
         resultBuffer = ReadRequest.converToString(request, response);
         PrintWriter out = response.getWriter();
-        
-        PlaceBean placeBean;
+        //----------------Creat PlaceBean Object from Json String--------
+        PlaceBean currentPlace;
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         System.out.println("josn created");
-        placeBean = gson.fromJson(resultBuffer.toString(), PlaceBean.class);
+        currentPlace = gson.fromJson(resultBuffer.toString(), PlaceBean.class);
         System.out.println("object created");
         
-        System.out.println(placeBean.getName());
-        System.out.println(placeBean.getLatitude());
-        
-        
+        //------------List All the Places From Database----------
         PlaceService placeService = new PlaceService();
-        List<Place> listOfPlace = new ArrayList<Place>();
+        List<Place> listOfPlaces = new ArrayList<Place>();
         
         try {
-            listOfPlace = placeService.getPlaceList();
+            
+            listOfPlaces = placeService.getPlaceList();
          //   System.out.println("####"+listOfPlace.get(1).getPhotosList().size());
         } catch (GenericBusinessException ex) {
             Logger.getLogger(MapShow.class.getName()).log(Level.SEVERE, null, ex);
         }
         List<PlaceBean> listOfPlaceBean = new ArrayList<PlaceBean>();
-        for(int i=0; i< listOfPlace.size(); i++){
-            double dist = CalculationByDistance(placeBean.getLatitude(), placeBean.getLongitude(), listOfPlace.get(i).getLatitude(), listOfPlace.get(i).getLongitude());
+        
+        //-----------Take the nearest places between 50km from Current Place-----------
+        for(int i=0; i< listOfPlaces.size(); i++){
             
-            if(dist<50.00){
-                PlaceBean newPlace = new PlaceBean(listOfPlace.get(i));
-                listOfPlaceBean.add(newPlace);
+            double currentPlaceLatitude = currentPlace.getLatitude();
+            double currentPlaceLongitude = currentPlace.getLongitude();
+            double anyPlaceLatitude = listOfPlaces.get(i).getLatitude();
+            double anyPlaceLongitude = listOfPlaces.get(i).getLongitude();
+            double distance = CalculationByDistance(currentPlaceLatitude, currentPlaceLongitude, anyPlaceLatitude,anyPlaceLongitude );
+            
+            if(distance<50.00){
+                PlaceBean nearestPlace = new PlaceBean(listOfPlaces.get(i));
+                listOfPlaceBean.add(nearestPlace);
             }
         }
         String result = gson.toJson(listOfPlaceBean);

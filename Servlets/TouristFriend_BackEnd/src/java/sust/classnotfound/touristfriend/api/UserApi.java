@@ -24,5 +24,6 @@ public interface UserApi {
     
     Boolean loginCheck(UserBean userBean) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
     
-
+    UserBean findUserByIdUser(java.lang.Integer idUser) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
+    void saveUser(UserBean userBean) throws sust.classnotfound.touristfriend.exception.GenericBusinessException;
 }

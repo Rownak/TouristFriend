@@ -119,8 +119,7 @@ public class UploadFromStroageClass extends Activity{
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView imageView;
-			if (convertView == null) { // if it's not recycled, initialize some
-										// attributes
+			if (convertView == null) { 
 				imageView = new ImageView(mContext);
 				imageView.setLayoutParams(new GridView.LayoutParams(220, 220));
 				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -189,40 +188,11 @@ public class UploadFromStroageClass extends Activity{
 		myImageAdapter = new ImageAdapter(this);
 		gridview.setAdapter(myImageAdapter);
 
-		/*
-		 * Move to asyncTaskLoadFiles String ExternalStorageDirectoryPath =
-		 * Environment .getExternalStorageDirectory() .getAbsolutePath();
-		 * 
-		 * String targetPath = ExternalStorageDirectoryPath + "/test/";
-		 * 
-		 * Toast.makeText(getApplicationContext(), targetPath,
-		 * Toast.LENGTH_LONG).show(); File targetDirector = new
-		 * File(targetPath);
-		 * 
-		 * File[] files = targetDirector.listFiles(); for (File file : files){
-		 * myImageAdapter.add(file.getAbsolutePath()); }
-		 */
 		myAsyncTaskLoadFiles = new AsyncTaskLoadFiles(myImageAdapter);
 		myAsyncTaskLoadFiles.execute();
 
 		gridview.setOnItemClickListener(myOnItemClickListener);
 		
-//		Button buttonReload = (Button)findViewById(R.id.reload);
-//		buttonReload.setOnClickListener(new OnClickListener(){
-//
-//			@Override
-//			public void onClick(View arg0) {
-//				
-//				//Cancel the previous running task, if exist.
-//				myAsyncTaskLoadFiles.cancel(true);
-//				
-//				//new another ImageAdapter, to prevent the adapter have
-//				//mixed files
-//				myImageAdapter = new ImageAdapter(UploadFromStroageClass.this);
-//				gridview.setAdapter(myImageAdapter);
-//				myAsyncTaskLoadFiles = new AsyncTaskLoadFiles(myImageAdapter);
-//				myAsyncTaskLoadFiles.execute();
-//			}});
 
 	}
 
@@ -231,12 +201,6 @@ public class UploadFromStroageClass extends Activity{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			//String prompt = "remove"+ (String) parent.getItemAtPosition(position);		
-//			myImageAdapter.remove(position);
-//			myImageAdapter.notifyDataSetChanged();
-			
-//			Intent intent=new Intent(MainActivity.this,test.class);
-//			startActivity(intent);
 			
 			final String imgNameUrl=(String) parent.getItemAtPosition(position);
 			String[] imageNameSplited= imgNameUrl.split("/");
@@ -262,9 +226,7 @@ public class UploadFromStroageClass extends Activity{
 					.setMessage("")
 					.setCancelable(false).setPositiveButton("OK",new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,int id) {
-							// if this button is clicked, close
-							// current activity
-							//MainActivity.this.finish();
+							// if this button is clicked, close current activity
 						
 							Intent intent=new Intent(UploadFromStroageClass.this,UploadPhotoClass.class);
 							intent.putExtra("latitude", latt);
@@ -321,7 +283,7 @@ public class UploadFromStroageClass extends Activity{
 		  
 		  
 		}
-		//-------------------------------------------------------------------------
+		
 		double dms2Dbl(String sDMS){
 		  double dRV = 999.0;
 		  try {

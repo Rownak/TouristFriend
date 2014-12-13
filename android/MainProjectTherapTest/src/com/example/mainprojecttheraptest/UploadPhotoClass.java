@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.commons.codec.binary.Base64;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,7 +14,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
-
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,11 +22,7 @@ import com.android.volley.toolbox.Volley;
 
 
 public class UploadPhotoClass extends FragmentActivity {
-
-	
 	ViewPager viewPager;
-	//String URL= "http://192.168.2.108:8084/imageUpload/";
-	String URL= "http://192.168.2.110:8084/TouristFriend_BackEnd/";
 	String fileUrl,imageName;
 	double latitude,longitude;
 	public static FragmentManager fragmentManager = null;
@@ -37,17 +30,6 @@ public class UploadPhotoClass extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-
-		// fragmentManager = getSupportFragmentManager();
-		// tabAdapter = new TabAdapter(getSupportFragmentManager());
-		//
-		// viewPager = (ViewPager) findViewById(R.id.pager);
-		// viewPager.setAdapter(tabAdapter);
-		//
-		// pageIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
-		// pageIndicator.setViewPager(viewPager);
-		
 		Intent intent = getIntent();
 		fileUrl = intent.getExtras().getString("fileUrl");
 		imageName = intent.getExtras().getString("imageName");
@@ -105,7 +87,7 @@ public class UploadPhotoClass extends FragmentActivity {
 					.show();
 		}
 		StringRequest strReq = new StringRequest(Method.POST,
-				URL + "UploadImage",
+				Config.SERVER_URL + "UploadImage",
 				new Response.Listener<String>() {
 
 					@Override

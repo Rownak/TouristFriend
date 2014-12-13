@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     
-    android:background="@drawable/frontsearch"
-    android:orientation="vertical" >
+    android:background="@drawable/ratebackgraound"
+    android:orientation="vertical" 
+   >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:alpha=".99" />
+            
+             />
 
         <Button
             android:id="@+id/okbutton"
@@ -27,7 +29,8 @@
             android:layout_below="@+id/ratingbar_default"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="39dp"
-            android:text="OK" />
+            android:text="OK" 
+            android:background="#a4a6a7"/>
 
     </RelativeLayout>
 

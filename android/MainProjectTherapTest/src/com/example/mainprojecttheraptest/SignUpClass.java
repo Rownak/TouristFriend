@@ -93,7 +93,7 @@ public class SignUpClass extends Activity{
 					//Toast.makeText(Registration_class.this, jsonToPass,Toast.LENGTH_LONG).show();
 					if(userBean.validate()){
 						Toast.makeText(getApplicationContext(), userBean.getMessage(), Toast.LENGTH_LONG).show();
-						new HttpAsyncTask().execute("http://192.168.2.110:8084/TouristFriend_BackEnd/Registration");
+						new HttpAsyncTask().execute(Config.SERVER_URL+ "Registration");
 					}
 					else{
 						Toast.makeText(getApplicationContext(), userBean.getMessage(), Toast.LENGTH_LONG).show();
@@ -144,19 +144,6 @@ public class SignUpClass extends Activity{
 				// 2. make POST request to the given URL
 				HttpPost httpPost = new HttpPost(url);
 
-				
-
-				// 3. build jsonObject
-				
-
-				// 4. convert JSONObject to JSON to String
-				
-
-				// ** Alternative way to convert Person object to JSON string usin
-				// Jackson Lib
-				// ObjectMapper mapper = new ObjectMapper();
-				// json = mapper.writeValueAsString(person);
-
 				// 5. set json to StringEntity
 				StringEntity se = new StringEntity(jsonToPass);
 
@@ -203,7 +190,7 @@ public class SignUpClass extends Activity{
 			@Override
 			protected void onPostExecute(String result) {
 
-				//loading_ProgressBar.setVisibility(View.GONE);
+				
 				Toast.makeText(getBaseContext(), resultShow, Toast.LENGTH_LONG)
 						.show();
 			}

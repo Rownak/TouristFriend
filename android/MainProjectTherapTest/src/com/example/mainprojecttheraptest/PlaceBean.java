@@ -8,10 +8,7 @@ import java.util.List;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Rownak
- */
+
 public class PlaceBean {
     
     private Integer idPlace;

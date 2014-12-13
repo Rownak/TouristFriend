@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,7 @@ import sust.classnotfound.touristfriend.apiImpl.UserApiImpl;
 import sust.classnotfound.touristfriend.bean.UserBean;
 import sust.classnotfound.touristfriend.exception.GenericBusinessException;
 import sust.classnotfound.touristfriend.useful.ReadRequest;
+import sust.classnotfound.touristfriend.useful.SendMail;
 
 /**
  *
@@ -48,7 +50,7 @@ public class Registration extends HttpServlet {
         StringBuffer resultBuffer = new StringBuffer();
         resultBuffer = ReadRequest.converToString(request, response);
         
-        
+        //-----------Creating userBean Object From Json String
         UserBean userBean;
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
@@ -56,13 +58,20 @@ public class Registration extends HttpServlet {
         userBean = gson.fromJson(resultBuffer.toString(), UserBean.class);
         System.out.println("object created");
         
+        
+        //----------Creating The User
         UserApi userApi = new UserApiImpl();
         String result = "Error";
         try {
-            userApi.addUser(userBean);
+            userBean= userApi.addUser(userBean);
+            //---------Sendin Verification Mail
+            SendMail.sendMail(userBean.getEmail(),userBean.getIdUser());
             result = "Success";
         } catch (GenericBusinessException ex) {
             result = "Error";
+            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            result = "Email Not Exist";
             Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
         }
         

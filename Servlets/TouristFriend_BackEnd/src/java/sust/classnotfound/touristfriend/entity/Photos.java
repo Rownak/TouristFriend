@@ -84,15 +84,29 @@ public class Photos implements Serializable {
         this.idPhotos = idPhotos;
     }
 
-    public Photos(Integer idPhotos, double lat, double lang, double rating, int numOfUserRated, String photoUrl) {
+    public Photos(Integer idPhotos, double lat, double lang, String photoUrl, User idUser, Place idPlace, Season idSeason) {
+        this.idPhotos = idPhotos;
+        this.lat = lat;
+        this.lang = lang;
+        this.photoUrl = photoUrl;
+        this.idUser = idUser;
+        this.idPlace = idPlace;
+        this.idSeason = idSeason;
+    }
+    
+    public Photos(Integer idPhotos, double lat, double lang, double rating, int numOfUserRated, String photoUrl,Place idPlace) {
         this.idPhotos = idPhotos;
         this.lat = lat;
         this.lang = lang;
         this.rating = rating;
         this.numOfUserRated = numOfUserRated;
         this.photoUrl = photoUrl;
+        this.idPlace = idPlace;
     }
-
+    public static Photos newPhotos(double lat,double lang,String photoUrl, Place idPlace){
+        return new Photos(0,lat,lang,0,0,photoUrl,idPlace);
+    }
+    
     public Integer getIdPhotos() {
         return idPhotos;
     }

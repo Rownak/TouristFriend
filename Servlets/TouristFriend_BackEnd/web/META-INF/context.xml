@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/TouristFriend_BackEnd"/>
+<Context antiJARLocking="true" path="/TouristFriend_BackEnd">
+        <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+
+    <!-- Uncomment this to enable Comet connection tacking (provides events
+         on session expiration as well as webapp lifecycle) -->
+    <!--
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+    -->
+    
+     <Resource name="jdbc/touristfriend_db" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="root" password="" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/touristfriend_db"/>
+</Context>

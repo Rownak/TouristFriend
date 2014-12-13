@@ -77,7 +77,6 @@ public class SignInClass extends Activity{
 			return result;
 		}
 
-		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
 

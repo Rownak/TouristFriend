@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MapClass extends Activity implements OnMapClickListener,
-OnMarkerClickListener{
+		OnMarkerClickListener {
 	GoogleMap map;
 
 	private TextView addressLabel;
@@ -44,6 +44,7 @@ OnMarkerClickListener{
 	double longitude;
 
 	List<PlaceBean> listOfPlaceBean = null;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +65,7 @@ OnMarkerClickListener{
 
 		myLocation();
 
-		
 	}
-
-
 
 	public void myLocation() {
 		// TODO Auto-generated method stub
@@ -81,9 +79,9 @@ OnMarkerClickListener{
 		double latitude = myLocation.getLatitude();
 
 		double longitude = myLocation.getLongitude();
-		
-		//ImageCaptureClass imageCaptureClass =new ImageCaptureClass(latitude,longitude);
-		
+
+		// ImageCaptureClass imageCaptureClass =new
+		// ImageCaptureClass(latitude,longitude);
 
 		CurrntLatlng = new LatLng(latitude, longitude);
 
@@ -91,19 +89,14 @@ OnMarkerClickListener{
 
 		addressLabel.setText(res);
 		// Toast.makeText(getApplicationContext(), res,5).show();
-		MarkerOptions marker = new MarkerOptions().position(CurrntLatlng).title(
-				"My Location!");
-
-		//map.addMarker(marker);
+		MarkerOptions marker = new MarkerOptions().position(CurrntLatlng)
+				.title("My Location!");
 
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(CurrntLatlng, 10.0f));
-		
-		//------------- conver the currentlocation to placebean obj------------- 
+
 		resultJson = converToJson(currentAddress, latitude, longitude);
-		//-------------call mapshow servlet for showing marker---------
-		
+
 		new HttpAsyncTask().execute(Config.SERVER_URL + "MapShow");
-		
 
 	}
 
@@ -118,7 +111,6 @@ OnMarkerClickListener{
 
 		return resultJson;
 	}
-	
 
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		@Override
@@ -134,7 +126,6 @@ OnMarkerClickListener{
 		@Override
 		protected void onPostExecute(String result) {
 
-			// loading_ProgressBar.setVisibility(View.GONE);
 			resultShow = result;
 			Log.d("Result", result);
 			Log.v("Result", result);
@@ -158,7 +149,6 @@ OnMarkerClickListener{
 			markerClicked = false;
 		}
 	}
-	
 
 	private void fromJsonToObj(String className) throws ClassNotFoundException,
 			InstantiationException, IllegalAccessException {
@@ -174,13 +164,13 @@ OnMarkerClickListener{
 			Type type = new TypeToken<List<PlaceBean>>() {
 			}.getType();
 
-			 listOfPlaceBean = gson.fromJson(resultShow, type);
+			listOfPlaceBean = gson.fromJson(resultShow, type);
 			Toast.makeText(getApplicationContext(),
 					listOfPlaceBean.get(0).getName(), Toast.LENGTH_LONG).show();
 			addMarker(listOfPlaceBean);
 		} else if (obj instanceof PhotosBean) {
 			PhotosBean photosBean = new PhotosBean();
-			
+
 			Type type = new TypeToken<List<PhotosBean>>() {
 			}.getType();
 
@@ -190,6 +180,7 @@ OnMarkerClickListener{
 		}
 
 	}
+
 	private void addMarker(List<PlaceBean> listOfPlaceBean) {
 		// TODO Auto-generated method stub
 
@@ -205,57 +196,48 @@ OnMarkerClickListener{
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		// TODO Auto-generated method stub
-		
-		final int markerNumb = Integer.parseInt(marker.getSnippet());
-		
 
-		LatLng EndP = new LatLng(listOfPlaceBean.get(markerNumb).getLatitude(), listOfPlaceBean.get(markerNumb).getLongitude());
+		final int markerNumb = Integer.parseInt(marker.getSnippet());
+
+		LatLng EndP = new LatLng(listOfPlaceBean.get(markerNumb).getLatitude(),
+				listOfPlaceBean.get(markerNumb).getLongitude());
 
 		Double distance = CalculationByDistance(CurrntLatlng, EndP);
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		// set title
-		alertDialogBuilder.setTitle("Place Name:" + listOfPlaceBean.get(markerNumb).getName());
-		Toast.makeText(getApplicationContext(), listOfPlaceBean.get(markerNumb).getName(), Toast.LENGTH_LONG).show();
+		alertDialogBuilder.setTitle("Place Name:"
+				+ listOfPlaceBean.get(markerNumb).getName());
+		Toast.makeText(getApplicationContext(),
+				listOfPlaceBean.get(markerNumb).getName(), Toast.LENGTH_LONG)
+				.show();
 		// set dialog message
 		alertDialogBuilder
-				.setMessage(
-						"Distance::" + distance )
+				.setMessage("Distance::" + distance)
 				.setCancelable(false)
 				.setPositiveButton("Show Images",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								// if this button is clicked, close
-								// current activity
-								// MainActivity.this.finish();
 
-								// Intent intent=new
-								// Intent(MapActivity.this,ShowImage.class);
-								// intent.putExtra("pathName", path);
-								// startActivity(intent);
-								
-								if(listOfPlaceBean.get(markerNumb).getPhotosList().size()>0){
+								if (listOfPlaceBean.get(markerNumb)
+										.getPhotosList().size() > 0) {
 									setContentView(R.layout.webview);
 
 									webView = (WebView) findViewById(R.id.webView1);
-									webView.getSettings().setJavaScriptEnabled(true);
+									webView.getSettings().setJavaScriptEnabled(
+											true);
 
 									Gson gson = new Gson();
-//									String listOfImagesString = gson.toJson(listOfPlaceBean.get(markerNumb).getPhotosList());
-//									webView.loadUrl(Config.SERVER_URL+"ImgShowServlet"+"?address=" +listOfImagesString);
-									
-									PlaceBean clickedPlace = listOfPlaceBean.get(markerNumb);
-									webView.loadUrl(Config.SERVER_URL+"WebViewOfImages"+"?idPlace=" +clickedPlace.getIdPlace());
+
+									PlaceBean clickedPlace = listOfPlaceBean
+											.get(markerNumb);
+									webView.loadUrl(Config.SERVER_URL
+											+ "WebViewOfImages" + "?idPlace="
+											+ clickedPlace.getIdPlace());
 								}
-								
-							 
-								
-								
-								//new HttpAsyncTask().execute(Config.SERVER_URL + "PhotosGet");
+
 							}
-						})
-				.setNegativeButton("Not now",
-						new DialogInterface.OnClickListener() {
+						}).setNegativeButton("Not now",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								// if this button is clicked, just close
 								// the dialog box and do nothing

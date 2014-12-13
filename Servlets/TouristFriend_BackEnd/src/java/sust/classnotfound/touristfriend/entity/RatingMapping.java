@@ -39,6 +39,9 @@ public class RatingMapping implements Serializable {
     @Column(name = "id_rating")
     private Integer idRating;
     @Basic(optional = false)
+    @Column(name = "num_of_user_rated")
+    private Integer numOfUserRated;
+    @Basic(optional = false)
     @Column(name = "rating")
     private double rating;
     @JoinColumn(name = "id_place", referencedColumnName = "id_place")
@@ -47,6 +50,8 @@ public class RatingMapping implements Serializable {
     @JoinColumn(name = "id_season", referencedColumnName = "id_season")
     @ManyToOne(optional = false)
     private Season idSeason;
+
+
 
     public RatingMapping() {
     }
@@ -59,7 +64,12 @@ public class RatingMapping implements Serializable {
         this.idRating = idRating;
         this.rating = rating;
     }
-
+    public void setNumOfUserRated(Integer numOfUserRated) {
+        this.numOfUserRated = numOfUserRated;
+    }
+    public Integer getNumOfUserRated() {
+        return numOfUserRated;
+    }
     public Integer getIdRating() {
         return idRating;
     }

@@ -10,8 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,18 +39,19 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("application/json");
         StringBuffer resultBuffer = new StringBuffer();
         resultBuffer = ReadRequest.converToString(request, response);
         PrintWriter out = response.getWriter();
-        
+        //------------creat userBean object from the Json Data------------------
         UserBean userBean;
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         System.out.println("josn created");
         userBean = gson.fromJson(resultBuffer.toString(), UserBean.class);
         System.out.println("object created");
-        
+        //------------Check if the email and password is Valid------------
         String result =check(userBean);
         out.println(result);
     }
@@ -63,7 +63,8 @@ public class Login extends HttpServlet {
         try {
            valid= userApiImpl.loginCheck(userBean);
         } catch (GenericBusinessException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            return "invalid";
+            
         }
         if(valid){
             return "Valid";

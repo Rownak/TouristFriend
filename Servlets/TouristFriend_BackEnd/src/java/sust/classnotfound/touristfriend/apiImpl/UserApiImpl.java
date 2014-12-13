@@ -69,6 +69,27 @@ public class UserApiImpl implements UserApi{
         return valid;
         
     }
+
+    @Override
+    public UserBean findUserByIdUser(Integer idUser) throws GenericBusinessException {
+        
+        List list = userService.findUserByIdUser(idUser);
+        UserBean ub=null;
+        if(list.size()>0){
+             ub = new UserBean((User) list.get(0)) ;
+        }
+        
+        return ub;
+        
+    }
+
+    @Override
+    public void saveUser(UserBean userBean) throws GenericBusinessException {
+        
+        User user = new User(userBean);
+        
+        userService.saveUser(user);
+    }
     
     
 }

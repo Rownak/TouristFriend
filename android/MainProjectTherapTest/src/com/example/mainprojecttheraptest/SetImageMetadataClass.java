@@ -68,7 +68,7 @@ public class SetImageMetadataClass {
    	    ef.saveAttributes();
    	  } catch (IOException e) {}         
    	}
-   	//-----------------------------------------------------------------------------------
+   
    	String dec2DMS(double coord) {  
    	  coord = coord > 0 ? coord : -coord;  // -105.9876543 -> 105.9876543
    	  String sOut = Integer.toString((int)coord) + "/1,";   // 105/1,

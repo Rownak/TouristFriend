@@ -33,6 +33,9 @@ public class UserBean {
     
     private TypeBean typeBean;
 
+    public UserBean() {
+    }
+
     public UserBean(User user) {
         this.idUser = user.getIdUser();
         this.userId = user.getUserId();
