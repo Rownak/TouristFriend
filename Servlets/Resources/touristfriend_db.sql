@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2014 at 04:01 PM
+-- Generation Time: Dec 13, 2014 at 04:54 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -254,8 +254,8 @@ INSERT INTO `user` (`id_user`, `user_id`, `user_name`, `email`, `password`, `val
 (4, 1123, 'dgff', 'xghgfgj', 'gggg', 1, 'Client', NULL, 1),
 (5, 1123, 'rrrr', 'rrrr', 'rrrr', 1, 'Client', NULL, 1),
 (6, 1026665, 'fhjhfd', 'chjj@ghhh.ghh', 'jjjjj', 0, 'Male', NULL, 1),
-(7, 505645, 'fhjhfd', 'chjj@ghh', 'jjjjj', 0, 'Male', NULL, 1),
-(9, 814366, 'fihfd', 'rownak.sust@gmail.com', 'jjjjjj', 1, 'Male', NULL, 1);
+(7, 505645, 'fhjhfd', 'chjj@ghh', '12345', 0, 'Male', NULL, 1),
+(9, 814366, 'fihfd', 'rownak.sust@gmail.com', '12345', 1, 'Male', NULL, 1);
 
 --
 -- Constraints for dumped tables
