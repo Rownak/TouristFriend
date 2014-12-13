@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2014 at 04:54 PM
+-- Generation Time: Dec 13, 2014 at 05:21 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
   KEY `season_photos_fk` (`id_season`),
   KEY `place_photos_fk` (`id_place`),
   KEY `user_photos_fk` (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=115 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=122 ;
 
 --
 -- Dumping data for table `photos`
@@ -112,8 +112,6 @@ INSERT INTO `photos` (`id_photos`, `lat`, `lang`, `rating`, `num_of_user_rated`,
 (5, 25.18587, 91.67857, 2.0250569476082, 439, NULL, NULL, 1, 2, 1, '/Sylhet/Jaflong/jaflong3.jpg'),
 (6, 23.456, 91.67857, 6, 66, NULL, NULL, 1, 2, 1, '/Sylhet/Jaflong/jaflong4.jpg'),
 (7, 23.912649, 91.67857, 5, 435, NULL, NULL, 1, 2, 1, '/Sylhet/Jaflong/jaflong5.jpg'),
-(8, 23.7495747, 90.3967635, 0, 0, NULL, NULL, 1, 7, 1, 'pictures\\Dhaka\\Hatirjheel Link Road 1\\fahad.jpg'),
-(9, 23.7495747, 90.3967635, 0, 0, NULL, NULL, 1, 7, 1, '/Dhaka/Hatirjheel Link Road 1/fahad.jpg'),
 (10, 24.9089287, 91.8380018, 0, 0, NULL, NULL, 1, 8, 1, '/Sylhet/Sylhet - Sunamganj Highway/IMG20141212_192638.jpg'),
 (11, 24.9089287, 91.8380018, 0, 0, NULL, NULL, 1, 8, 1, '/Sylhet/Sylhet - Sunamganj Highway/IMG20141212_205648.jpg'),
 (88, 23.456, 91.67857, 0, 5, NULL, NULL, 1, 8, 1, 'pictures\\Sylhet\\Sylhet - Sunamganj Highway\\new.jpg'),
@@ -130,7 +128,13 @@ INSERT INTO `photos` (`id_photos`, `lat`, `lang`, `rating`, `num_of_user_rated`,
 (108, 24.908955555555554, 91.83798277777777, 0, 0, NULL, NULL, 1, 8, 1, '/Sylhet/Sylhet - Sunamganj Highway/IMG_20141213_164850.jpg'),
 (111, 24.908928055555553, 91.83798499999999, 0, 0, NULL, NULL, 1, 8, 1, '/Sylhet/Sylhet - Sunamganj Highway/IMG_20141213_204131.jpg'),
 (112, 24.9089282, 91.837985, 0, 0, NULL, NULL, 1, 8, 1, '/Sylhet/Sylhet - Sunamganj Highway/IMG20141213_204417.jpg'),
-(113, 24.908928055555553, 91.83798499999999, 0, 0, NULL, NULL, 1, 8, 1, '/Sylhet/Sylhet - Sunamganj Highway/IMG_20141213_204417.jpg');
+(113, 24.908928055555553, 91.83798499999999, 0, 0, NULL, NULL, 1, 8, 1, '/Sylhet/Sylhet - Sunamganj Highway/IMG_20141213_204417.jpg'),
+(116, 23.912649, 90.254374, 0, NULL, NULL, NULL, 1, 3, 1, '/Dhaka/Savar/savar2.jpg'),
+(117, 23.912649, 90.254374, 0, NULL, NULL, NULL, 1, 3, 1, '/Dhaka/Savar/savar3.jpg'),
+(118, 23.7495747, 90.3967635, 0, NULL, NULL, NULL, 1, 8, 1, '/Dhaka/Hatirjheel Link Road 1/hatirjhil1.jpg'),
+(119, 23.7495747, 90.3967635, 0, NULL, NULL, NULL, 1, 8, 1, '/Dhaka/Hatirjheel Link Road 1/hatirjhil2.jpg'),
+(120, 23.7495747, 90.3967635, 0, NULL, NULL, NULL, 1, 8, 1, '/Dhaka/Hatirjheel Link Road 1/hatirjhil3.jpg'),
+(121, 23.7495747, 90.3967635, 0, NULL, NULL, NULL, 1, 8, 1, '/Dhaka/Hatirjheel Link Road 1/hatirjhil4.jpg');
 
 -- --------------------------------------------------------
 
@@ -159,8 +163,6 @@ INSERT INTO `place` (`id_place`, `name`, `description`, `latitude`, `longitude`,
 (3, 'Radio Colony Road', 'savar', 23.912649, 90.254374, 4),
 (4, 'University Ave', NULL, 91.8322, 0, 7),
 (5, 'Hatirjheel Link Road 1', NULL, 23.7495747, 90.3967635, 8),
-(6, 'Hatirjheel Link Road 1', NULL, 23.7495747, 90.3967635, 10),
-(7, 'Hatirjheel Link Road 1', NULL, 23.7495747, 90.3967635, 9),
 (8, 'Sylhet - Sunamganj Highway', NULL, 24.9089335, 91.8380286, 11);
 
 -- --------------------------------------------------------
